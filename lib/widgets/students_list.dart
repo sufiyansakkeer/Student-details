@@ -61,6 +61,20 @@ class _ListStudentsState extends State<ListStudents> {
                   children: <Widget>[
                     IconButton(
                         onPressed: (() {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: ((context) {
+                                return EditStudent(
+                                    name: data.name,
+                                    age: data.age,
+                                    address: data.address,
+                                    number: data.phnNumber,
+                                    index: index,
+                                    image: data.photo,
+                                    photo: '');
+                              }),
+                            ),
+                          );
                           // EditStudent();
                         }),
                         icon: Icon(
