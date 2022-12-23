@@ -29,61 +29,67 @@ class DisplayStudent extends StatelessWidget {
         title: const Text('Student Details'),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            children: [
-              const Center(
-                child: Text(
-                  'Student Full Details',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-              CircleAvatar(
-                radius: 80,
-                backgroundImage: FileImage(
-                  File(
-                    photo,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              children: [
+                const Center(
+                  child: Text(
+                    'Student Full Details',
+                    style: TextStyle(
+                        fontSize: 25, color: Color.fromARGB(255, 40, 67, 80)),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                'name: $name',
-                style: const TextStyle(
-                  fontSize: 20,
+                const SizedBox(
+                  height: 30,
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                'age: $age',
-                style: const TextStyle(
-                  fontSize: 20,
+                CircleAvatar(
+                  radius: 80,
+                  backgroundImage: FileImage(
+                    File(
+                      photo,
+                    ),
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Address: $address',
-                style: const TextStyle(
-                  fontSize: 20,
+                const SizedBox(
+                  height: 10,
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Phone Number: $number',
-                style: const TextStyle(
-                  fontSize: 20,
+                Text(
+                  'Name: $name',
+                  style: const TextStyle(
+                    fontSize: 20,
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Age: $age',
+                  style: const TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Address: $address',
+                  style: const TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Phone Number: $number',
+                  style: const TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -50,15 +50,24 @@ class _EditStudentState extends State<EditStudent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Edit'),
+      ),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(30.0),
-          child: SingleChildScrollView(
-            child: Form(
-                key: _formkey,
+        child: SingleChildScrollView(
+          child: Form(
+              key: _formkey,
+              child: Padding(
+                padding: const EdgeInsets.all(25.0),
                 child: Column(
                   children: [
-                    Text('Edit student details'),
+                    Text(
+                      'Edit student details',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     CircleAvatar(
                       radius: 80,
                       backgroundImage: FileImage(
@@ -157,8 +166,8 @@ class _EditStudentState extends State<EditStudent> {
                       ],
                     ),
                   ],
-                )),
-          ),
+                ),
+              )),
         ),
       ),
     );
@@ -171,6 +180,20 @@ class _EditStudentState extends State<EditStudent> {
       phnNumber: _phnofStudent.text,
       address: _addressofStudent.text,
       photo: widget.image,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        behavior: SnackBarBehavior.floating,
+        margin: EdgeInsets.all(30),
+        backgroundColor: Colors.blueGrey,
+        content: Text(
+          'Saved',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
     );
     editList(widget.index, studentmodel);
   }

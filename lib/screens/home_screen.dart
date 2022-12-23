@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sample_2/db/functions/db_function.dart';
 
 import 'package:sample_2/widgets/add_students.dart';
+import 'package:sample_2/widgets/search_screen.dart';
 import 'package:sample_2/widgets/students_list.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,9 +18,21 @@ class _HomeScreenState extends State<HomeScreen> {
     getallstudents();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.search),
+            tooltip: 'Open search',
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: SearchWidget(),
+              );
+            },
+          ),
+        ],
       ),
-      body: ListStudents(),
+      body: const ListStudents(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
@@ -32,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         },
         child: Icon(Icons.add),
+        tooltip: 'Add students',
       ),
     );
   }

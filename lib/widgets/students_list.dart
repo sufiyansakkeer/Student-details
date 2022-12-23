@@ -23,43 +23,45 @@ class _ListStudentsState extends State<ListStudents> {
         return ListView.separated(
             itemBuilder: ((context, index) {
               final data = studentModel[index];
-              return ListTile(
-                leading: CircleAvatar(
-                  radius: 30,
-                  backgroundImage: FileImage(
-                    File(data.photo),
+              return Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: ListTile(
+                  leading: CircleAvatar(
+                    radius: 30,
+                    backgroundImage: FileImage(
+                      File(data.photo),
+                    ),
                   ),
-                ),
-                title: Text(data.name),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(data.age),
-                    Text(data.phnNumber),
-                    Text(data.address),
-                  ],
-                ),
-                // trailing: Row(
-                //   children: <Widget>[(
-                //     child: IconButton(
-                //         onPressed: (() {
-                //           // if (data.id != null) {
-                //           //   deleteStudent(index);
-                //           // } else {
-                //           //   print('there is no student data');
-                //           // }
-                //           deleteStudent(index);
-                //         }),
-                //         icon: const Icon(
-                //           Icons.delete_outline,
-                //           color: Colors.red,
-                //         )),
-                //   ),]
-                // ),
-                trailing: Wrap(
-                  spacing: 12, // space between two icons
-                  children: <Widget>[
-                    IconButton(
+                  title: Text(data.name),
+                  // subtitle: Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     Text(data.age),
+                  //     Text(data.phnNumber),
+                  //     Text(data.address),
+                  //   ],
+                  // ),
+                  // trailing: Row(
+                  //   children: <Widget>[(
+                  //     child: IconButton(
+                  //         onPressed: (() {
+                  //           // if (data.id != null) {
+                  //           //   deleteStudent(index);
+                  //           // } else {
+                  //           //   print('there is no student data');
+                  //           // }
+                  //           deleteStudent(index);
+                  //         }),
+                  //         icon: const Icon(
+                  //           Icons.delete_outline,
+                  //           color: Colors.red,
+                  //         )),
+                  //   ),]
+                  // ),
+                  trailing: Wrap(
+                    spacing: 12, // space between two icons
+                    children: <Widget>[
+                      IconButton(
                         onPressed: (() {
                           Navigator.of(context).push(
                             MaterialPageRoute(
@@ -77,12 +79,14 @@ class _ListStudentsState extends State<ListStudents> {
                           );
                           // EditStudent();
                         }),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.edit,
                           color: Colors.blue,
-                        )),
+                        ),
+                        tooltip: 'Edit',
+                      ),
 
-                    IconButton(
+                      IconButton(
                         onPressed: (() {
                           // if (data.id != null) {
                           //   deleteStudent(index);
@@ -94,23 +98,26 @@ class _ListStudentsState extends State<ListStudents> {
                         icon: const Icon(
                           Icons.delete_outline,
                           color: Colors.red,
-                        )),
-                    // icon-2
-                  ],
+                        ),
+                        tooltip: 'Delete',
+                      ),
+                      // icon-2
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: ((context) {
+                      return DisplayStudent(
+                        name: data.name,
+                        age: data.age,
+                        address: data.address,
+                        number: data.phnNumber,
+                        index: index,
+                        photo: data.photo,
+                      );
+                    })));
+                  },
                 ),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) {
-                    return DisplayStudent(
-                      name: data.name,
-                      age: data.age,
-                      address: data.address,
-                      number: data.phnNumber,
-                      index: index,
-                      photo: data.photo,
-                    );
-                  })));
-                },
               );
             }),
             separatorBuilder: ((context, index) {
