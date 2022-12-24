@@ -91,6 +91,13 @@ class _AddStudentClassState extends State<AddStudentClass> {
                     hintText: 'Enter age',
                     labelText: 'age',
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Required Age';
+                    } else {
+                      return null;
+                    }
+                  },
                 ),
                 // const SizedBox(
                 //   height: 20,
@@ -102,6 +109,13 @@ class _AddStudentClassState extends State<AddStudentClass> {
                     hintText: 'Enter address',
                     labelText: 'address',
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Required Address';
+                    } else {
+                      return null;
+                    }
+                  },
                 ),
                 const SizedBox(
                   height: 20,
@@ -115,6 +129,15 @@ class _AddStudentClassState extends State<AddStudentClass> {
                     hintText: 'Enter the number',
                     labelText: 'number',
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'required';
+                    } else if (value.length < 10) {
+                      return 'invalid phone number';
+                    } else {
+                      return null;
+                    }
+                  },
                 ),
                 ElevatedButton.icon(
                     onPressed: (() {

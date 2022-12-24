@@ -41,15 +41,18 @@ class SearchWidget extends SearchDelegate {
         return ListView.builder(
           itemBuilder: (ctx, index) {
             final data = studentList[index];
-            if (data.name.toLowerCase().contains(query.toLowerCase())) {
+            if (data.name.toLowerCase().contains(
+                  query.toLowerCase(),
+                )) {
               return Column(
                 children: [
                   ListTile(
                     onTap: () {
-                      Navigator.of(context).push(
+                      Navigator.push(
+                        context,
                         MaterialPageRoute(
                           builder: ((context) {
-                            return ListStudents();
+                            return const ListStudents();
                           }),
                         ),
                       );

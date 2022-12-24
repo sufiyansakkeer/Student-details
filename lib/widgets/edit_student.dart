@@ -1,8 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:sample_2/db/functions/db_function.dart';
 import 'package:sample_2/db/models/data_modal.dart';
 
@@ -30,21 +29,21 @@ class EditStudent extends StatefulWidget {
 }
 
 class _EditStudentState extends State<EditStudent> {
-  TextEditingController _nameofStudent = TextEditingController();
-  TextEditingController _ageofStudent = TextEditingController();
-  TextEditingController _addressofStudent = TextEditingController();
-  TextEditingController _phnofStudent = TextEditingController();
+  TextEditingController _nameOfStudent = TextEditingController();
+  TextEditingController _ageOfStudent = TextEditingController();
+  TextEditingController _addressOfStudent = TextEditingController();
+  TextEditingController _phnOfStudent = TextEditingController();
 
   final _formkey = GlobalKey<FormState>();
 
   @override
   void initState() {
-    // TODO: implement initState
+    super.initState();
 
-    _nameofStudent = TextEditingController(text: widget.name);
-    _ageofStudent = TextEditingController(text: widget.age);
-    _addressofStudent = TextEditingController(text: widget.address);
-    _phnofStudent = TextEditingController(text: widget.number);
+    _nameOfStudent = TextEditingController(text: widget.name);
+    _ageOfStudent = TextEditingController(text: widget.age);
+    _addressOfStudent = TextEditingController(text: widget.address);
+    _phnOfStudent = TextEditingController(text: widget.number);
   }
 
   @override
@@ -61,7 +60,7 @@ class _EditStudentState extends State<EditStudent> {
                 padding: const EdgeInsets.all(25.0),
                 child: Column(
                   children: [
-                    Text(
+                    const Text(
                       'Edit student details',
                       style: TextStyle(fontSize: 20),
                     ),
@@ -78,7 +77,7 @@ class _EditStudentState extends State<EditStudent> {
                       height: 20,
                     ),
                     TextFormField(
-                      controller: _nameofStudent,
+                      controller: _nameOfStudent,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: '',
@@ -97,7 +96,7 @@ class _EditStudentState extends State<EditStudent> {
                     ),
                     TextFormField(
                       maxLength: 2,
-                      controller: _ageofStudent,
+                      controller: _ageOfStudent,
                       keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -116,7 +115,7 @@ class _EditStudentState extends State<EditStudent> {
                       height: 20,
                     ),
                     TextFormField(
-                      controller: _addressofStudent,
+                      controller: _addressOfStudent,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Enter your address',
@@ -135,7 +134,7 @@ class _EditStudentState extends State<EditStudent> {
                     ),
                     TextFormField(
                       maxLength: 10,
-                      controller: _phnofStudent,
+                      controller: _phnOfStudent,
                       keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -145,6 +144,8 @@ class _EditStudentState extends State<EditStudent> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Required Number';
+                        } else if (value.length < 10) {
+                          return 'invalid phone number';
                         } else {
                           return null;
                         }
@@ -175,10 +176,10 @@ class _EditStudentState extends State<EditStudent> {
 
   Future<void> onEditSaveButton(ctx) async {
     final studentmodel = StudentModel(
-      name: _nameofStudent.text,
-      age: _ageofStudent.text,
-      phnNumber: _phnofStudent.text,
-      address: _addressofStudent.text,
+      name: _nameOfStudent.text,
+      age: _ageOfStudent.text,
+      phnNumber: _phnOfStudent.text,
+      address: _addressOfStudent.text,
       photo: widget.image,
     );
     ScaffoldMessenger.of(context).showSnackBar(

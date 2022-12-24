@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:sample_2/db/models/data_modal.dart';
+
 import 'package:sample_2/widgets/display_student_screen.dart';
 import 'package:sample_2/widgets/edit_student.dart';
 
@@ -33,31 +33,6 @@ class _ListStudentsState extends State<ListStudents> {
                     ),
                   ),
                   title: Text(data.name),
-                  // subtitle: Column(
-                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                  //   children: [
-                  //     Text(data.age),
-                  //     Text(data.phnNumber),
-                  //     Text(data.address),
-                  //   ],
-                  // ),
-                  // trailing: Row(
-                  //   children: <Widget>[(
-                  //     child: IconButton(
-                  //         onPressed: (() {
-                  //           // if (data.id != null) {
-                  //           //   deleteStudent(index);
-                  //           // } else {
-                  //           //   print('there is no student data');
-                  //           // }
-                  //           deleteStudent(index);
-                  //         }),
-                  //         icon: const Icon(
-                  //           Icons.delete_outline,
-                  //           color: Colors.red,
-                  //         )),
-                  //   ),]
-                  // ),
                   trailing: Wrap(
                     spacing: 12, // space between two icons
                     children: <Widget>[
@@ -88,12 +63,38 @@ class _ListStudentsState extends State<ListStudents> {
 
                       IconButton(
                         onPressed: (() {
-                          // if (data.id != null) {
-                          //   deleteStudent(index);
-                          // } else {
-                          //   print('there is no student data');
-                          // }
-                          deleteStudent(index);
+                          showDialog(
+                            context: context,
+                            builder: ((context) {
+                              return Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: AlertDialog(
+                                  title: const Text(
+                                    'Alert!',
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  content: const Text(
+                                    "Do you want to delete this student",
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: (() {
+                                        deleteStudent(index);
+                                      }),
+                                      child: const Text('Yes'),
+                                    ),
+                                    TextButton(
+                                        onPressed: (() {
+                                          popoutfuction(context);
+                                        }),
+                                        child: const Text('No'))
+                                  ],
+                                ),
+                              );
+                            }),
+                          );
                         }),
                         icon: const Icon(
                           Icons.delete_outline,
@@ -105,17 +106,21 @@ class _ListStudentsState extends State<ListStudents> {
                     ],
                   ),
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) {
-                      return DisplayStudent(
-                        name: data.name,
-                        age: data.age,
-                        address: data.address,
-                        number: data.phnNumber,
-                        index: index,
-                        photo: data.photo,
-                      );
-                    })));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: ((context) {
+                          return DisplayStudent(
+                            name: data.name,
+                            age: data.age,
+                            address: data.address,
+                            number: data.phnNumber,
+                            index: index,
+                            photo: data.photo,
+                          );
+                        }),
+                      ),
+                    );
                   },
                 ),
               );
@@ -126,5 +131,9 @@ class _ListStudentsState extends State<ListStudents> {
             itemCount: studentModel.length);
       },
     );
+  }
+
+  popoutfuction(BuildContext context) {
+    return Navigator.of(context).pop();
   }
 }

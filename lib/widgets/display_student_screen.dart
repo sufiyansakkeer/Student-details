@@ -1,8 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:sample_2/widgets/edit_student.dart';
 
 class DisplayStudent extends StatelessWidget {
   final String name;
@@ -11,7 +10,7 @@ class DisplayStudent extends StatelessWidget {
   final String number;
   final String photo;
   final int index;
-  DisplayStudent({
+  const DisplayStudent({
     super.key,
     required this.name,
     required this.age,
@@ -31,14 +30,13 @@ class DisplayStudent extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Column(
               children: [
                 const Center(
                   child: Text(
                     'Student Full Details',
-                    style: TextStyle(
-                        fontSize: 25, color: Color.fromARGB(255, 40, 67, 80)),
+                    style: TextStyle(fontSize: 25, color: Color(0xFF284350)),
                   ),
                 ),
                 const SizedBox(
@@ -88,6 +86,22 @@ class DisplayStudent extends StatelessWidget {
                     fontSize: 20,
                   ),
                 ),
+                ElevatedButton.icon(
+                    onPressed: (() {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: ((context) {
+                        return EditStudent(
+                            name: name,
+                            age: age,
+                            address: address,
+                            number: number,
+                            index: index,
+                            image: photo,
+                            photo: '');
+                      })));
+                    }),
+                    icon: const Icon(Icons.edit),
+                    label: const Text('Edit'))
               ],
             ),
           ),
