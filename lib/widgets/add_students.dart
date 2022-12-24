@@ -141,7 +141,12 @@ class _AddStudentClassState extends State<AddStudentClass> {
                 ),
                 ElevatedButton.icon(
                     onPressed: (() {
-                      onStudentAddButtonClick();
+                      if (_formKey.currentState!.validate() && _photo != null) {
+                        onStudentAddButtonClick();
+                        Navigator.of(context).pop();
+                      } else {
+                        imageAlert = true;
+                      }
                     }),
                     icon: const Icon(Icons.add),
                     label: const Text('Add student'))
@@ -159,13 +164,32 @@ class _AddStudentClassState extends State<AddStudentClass> {
     final address = _addressOfStudent.text.trim();
     final number = _phnOfStudent.text.trim();
 
-    if (name.isEmpty ||
+    if (_photo!.path.isEmpty ||
+        name.isEmpty ||
         age.isEmpty ||
         address.isEmpty ||
-        number.isEmpty ||
-        _photo!.path.isEmpty) {
+        number.isEmpty) {
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   const SnackBar(
+      //     behavior: SnackBarBehavior.floating,
+      //     margin: EdgeInsets.all(20),
+      //     content: Text("You need to add everything"),
+      //   ),
+      // );
       return;
-    } else {
+    }
+    // else if (_photo!.path.isEmpty) {
+    //   _photo = File(
+    //       'assets/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png');
+    //   // _photo.path = Image.asset(
+    //   //     'assets/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png');
+    //   // setState(
+    //   //   () {
+    //   //     _photo = photodefault;
+    //   //   },
+    //   // );
+    // }
+    else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           behavior: SnackBarBehavior.floating,
@@ -190,6 +214,14 @@ class _AddStudentClassState extends State<AddStudentClass> {
     final photo = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (photo == null) {
       return;
+      // final photodefault = Image.asset(
+      //     'assets/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png');
+
+      // setState(
+      //   () {
+      //     _photo = photodefault;
+      //   },
+      // );
     } else {
       final photoTemp = File(photo.path);
       setState(

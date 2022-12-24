@@ -81,6 +81,7 @@ class _ListStudentsState extends State<ListStudents> {
                                   actions: [
                                     TextButton(
                                       onPressed: (() {
+                                        popoutfuction(context);
                                         deleteStudent(index);
                                       }),
                                       child: const Text('Yes'),
