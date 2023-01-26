@@ -1,15 +1,21 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:sample_2/db/functions/db_function.dart';
 import 'package:sample_2/db/models/data_modal.dart';
 import 'package:sample_2/widgets/display_student_screen.dart';
 import 'package:sample_2/widgets/students_list.dart';
 
 class SearchWidget extends SearchDelegate {
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    assert(context != null);
+    final ThemeData theme = Theme.of(context);
+    assert(theme != null);
+    return theme;
+  }
+
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [

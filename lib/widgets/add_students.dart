@@ -25,9 +25,9 @@ class _AddStudentClassState extends State<AddStudentClass> {
       appBar: AppBar(
         title: const Text('Add Student details'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
           child: Form(
             key: _formKey,
             child: Column(
@@ -73,7 +73,7 @@ class _AddStudentClassState extends State<AddStudentClass> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Required Name';
+                      return ' Name is Required';
                     } else {
                       return null;
                     }
@@ -93,7 +93,7 @@ class _AddStudentClassState extends State<AddStudentClass> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Required Age';
+                      return ' Age is Required';
                     } else {
                       return null;
                     }
@@ -111,7 +111,7 @@ class _AddStudentClassState extends State<AddStudentClass> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Required Address';
+                      return ' Address is Required';
                     } else {
                       return null;
                     }

@@ -39,13 +39,13 @@ class _HomeScreenState extends State<HomeScreen> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return AddStudentClass();
+                return const AddStudentClass();
               },
             ),
           );
         },
-        child: Icon(Icons.add),
         tooltip: 'Add students',
+        child: const Icon(Icons.add),
       ),
     );
   }
