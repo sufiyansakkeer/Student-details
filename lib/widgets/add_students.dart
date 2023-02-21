@@ -64,6 +64,27 @@ class _AddStudentClassState extends State<AddStudentClass> {
                     ),
                   ],
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Visibility(
+                    visible: imageAlert,
+                    child: Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text(
+                            'Photo is required',
+                            style: TextStyle(
+                              color: Color(0xFFC01D11),
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
                 TextFormField(
                   controller: _nameOfStudent,
                   decoration: const InputDecoration(
@@ -147,6 +168,12 @@ class _AddStudentClassState extends State<AddStudentClass> {
                       } else {
                         imageAlert = true;
                       }
+                      if (_formKey.currentState!.validate() && _photo != null) {
+                        onStudentAddButtonClick();
+                        Navigator.of(context).pop();
+                      } else {
+                        imageAlert = true;
+                      }
                     }),
                     icon: const Icon(Icons.add),
                     label: const Text('Add student'))
@@ -164,11 +191,7 @@ class _AddStudentClassState extends State<AddStudentClass> {
     final address = _addressOfStudent.text.trim();
     final number = _phnOfStudent.text.trim();
 
-    if (_photo!.path.isEmpty ||
-        name.isEmpty ||
-        age.isEmpty ||
-        address.isEmpty ||
-        number.isEmpty) {
+    if (name.isEmpty || age.isEmpty || address.isEmpty || number.isEmpty) {
       // ScaffoldMessenger.of(context).showSnackBar(
       //   const SnackBar(
       //     behavior: SnackBarBehavior.floating,
@@ -181,13 +204,13 @@ class _AddStudentClassState extends State<AddStudentClass> {
     // else if (_photo!.path.isEmpty) {
     //   _photo = File(
     //       'assets/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png');
-    //   // _photo.path = Image.asset(
-    //   //     'assets/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png');
-    //   // setState(
-    //   //   () {
-    //   //     _photo = photodefault;
-    //   //   },
-    //   // );
+    // _photo.path = Image.asset(
+    //     'assets/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png');
+    // setState(
+    //   () {
+    //     _photo = photodefault;
+    //   },
+    // );
     // }
     else {
       ScaffoldMessenger.of(context).showSnackBar(

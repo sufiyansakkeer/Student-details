@@ -18,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
     getallstudents();
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('Home'),
         actions: <Widget>[
           IconButton(
