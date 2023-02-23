@@ -1,21 +1,11 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'package:sample_2/db/functions/db_function.dart';
-import 'package:sample_2/db/models/data_modal.dart';
+import 'package:sample_2/provider/provider_student.dart';
 import 'package:sample_2/widgets/display_student_screen.dart';
 import 'package:sample_2/widgets/students_list.dart';
 
 class SearchWidget extends SearchDelegate {
-  // @override
-  // ThemeData appBarTheme(BuildContext context) {
-  //   assert(context != null);
-  //   final ThemeData theme = Theme.of(context);
-  //   assert(theme != null);
-  //   return theme;
-  // }
-
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -40,13 +30,11 @@ class SearchWidget extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: studentListNotifier,
-      builder: ((BuildContext context, List<StudentModel> studentList,
-          Widget? child) {
+    return Consumer<ProviderStudent>(
+      builder: ((context, value, child) {
         return ListView.builder(
           itemBuilder: (ctx, index) {
-            final data = studentList[index];
+            final data = value.studentDetails[index];
             if (data.name.toLowerCase().contains(query.toLowerCase().trim())) {
               return Column(
                 children: [
@@ -73,7 +61,7 @@ class SearchWidget extends SearchDelegate {
               return Container();
             }
           },
-          itemCount: studentList.length,
+          itemCount: value.studentDetails.length,
         );
       }),
     );
@@ -81,13 +69,11 @@ class SearchWidget extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: studentListNotifier,
-      builder: ((BuildContext context, List<StudentModel> studentList,
-          Widget? child) {
+    return Consumer<ProviderStudent>(
+      builder: ((context, value, child) {
         return ListView.builder(
           itemBuilder: (ctx, index) {
-            final data = studentList[index];
+            final data = value.studentDetails[index];
             if (data.name.toLowerCase().contains(query.toLowerCase().trim())) {
               return Column(
                 children: [
@@ -120,7 +106,7 @@ class SearchWidget extends SearchDelegate {
               return Container();
             }
           },
-          itemCount: studentList.length,
+          itemCount: value.studentDetails.length,
         );
       }),
     );

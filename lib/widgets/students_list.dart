@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sample_2/provider/provider_student.dart';
 
 import 'package:sample_2/widgets/display_student_screen.dart';
 import 'package:sample_2/widgets/edit_student.dart';
@@ -12,12 +14,11 @@ class ListStudents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: studentListNotifier,
-      builder: (ctx, studentModel, Widget? child) {
+    return Consumer<ProviderStudent>(
+      builder: (ctx, value, Widget? child) {
         return ListView.separated(
             itemBuilder: ((context, index) {
-              final data = studentModel[index];
+              final data = value.studentDetails[index];
               return Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: ListTile(
@@ -78,7 +79,10 @@ class ListStudents extends StatelessWidget {
                                     TextButton(
                                       onPressed: (() {
                                         popoutfuction(context);
-                                        deleteStudent(index);
+                                        // deleteStudent(index);
+                                        Provider.of<ProviderStudent>(context,
+                                                listen: false)
+                                            .deleteStudent(index);
                                       }),
                                       child: const Text('Yes'),
                                     ),
@@ -125,7 +129,7 @@ class ListStudents extends StatelessWidget {
             separatorBuilder: ((context, index) {
               return const Divider();
             }),
-            itemCount: studentModel.length);
+            itemCount: value.studentDetails.length);
       },
     );
   }

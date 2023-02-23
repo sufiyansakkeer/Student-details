@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sample_2/db/functions/db_function.dart';
+import 'package:provider/provider.dart';
+
+import 'package:sample_2/provider/provider_student.dart';
 
 import 'package:sample_2/widgets/add_students.dart';
 import 'package:sample_2/widgets/search_screen.dart';
@@ -10,7 +12,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getallstudents();
+    Provider.of<ProviderStudent>(context, listen: false).getallstudents();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
@@ -34,7 +36,7 @@ class HomeScreen extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return const AddStudentClass();
+                return AddStudentClass();
               },
             ),
           );

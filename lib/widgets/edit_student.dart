@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:sample_2/db/functions/db_function.dart';
 import 'package:sample_2/db/models/data_modal.dart';
+import 'package:sample_2/provider/provider_student.dart';
 
-class EditStudent extends StatefulWidget {
+class EditStudent extends StatelessWidget {
   final String name;
   final String age;
   final String address;
@@ -13,7 +15,7 @@ class EditStudent extends StatefulWidget {
   // final String image;
   final int index;
 
-  const EditStudent({
+  EditStudent({
     super.key,
     required this.name,
     required this.age,
@@ -22,30 +24,22 @@ class EditStudent extends StatefulWidget {
     required this.index,
   });
 
-  @override
-  State<EditStudent> createState() => _EditStudentState();
-}
-
-class _EditStudentState extends State<EditStudent> {
   TextEditingController _nameOfStudent = TextEditingController();
+
   TextEditingController _ageOfStudent = TextEditingController();
+
   TextEditingController _addressOfStudent = TextEditingController();
+
   TextEditingController _phnOfStudent = TextEditingController();
 
   final _formkey = GlobalKey<FormState>();
 
   @override
-  void initState() {
-    super.initState();
-
-    _nameOfStudent = TextEditingController(text: widget.name);
-    _ageOfStudent = TextEditingController(text: widget.age);
-    _addressOfStudent = TextEditingController(text: widget.address);
-    _phnOfStudent = TextEditingController(text: widget.number);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    _nameOfStudent = TextEditingController(text: name);
+    _ageOfStudent = TextEditingController(text: age);
+    _addressOfStudent = TextEditingController(text: address);
+    _phnOfStudent = TextEditingController(text: number);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit'),
@@ -62,15 +56,6 @@ class _EditStudentState extends State<EditStudent> {
                       'Edit student details',
                       style: TextStyle(fontSize: 20),
                     ),
-                    // const SizedBox(
-                    //   height: 20,
-                    // ),
-                    // CircleAvatar(
-                    //   radius: 80,
-                    //   backgroundImage: FileImage(
-                    //     File(widget.image),
-                    //   ),
-                    // ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -156,6 +141,7 @@ class _EditStudentState extends State<EditStudent> {
                           onPressed: () {
                             if (_formkey.currentState!.validate()) {
                               onEditSaveButton(context);
+
                               Navigator.of(context).pop();
                             }
                           },
@@ -172,7 +158,7 @@ class _EditStudentState extends State<EditStudent> {
     );
   }
 
-  Future<void> onEditSaveButton(ctx) async {
+  Future<void> onEditSaveButton(context) async {
     final studentmodel = StudentModel(
       name: _nameOfStudent.text,
       age: _ageOfStudent.text,
@@ -180,6 +166,8 @@ class _EditStudentState extends State<EditStudent> {
       address: _addressOfStudent.text,
       // photo: widget.image,
     );
+    Provider.of<ProviderStudent>(context, listen: false)
+        .editList(index, studentmodel);
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         behavior: SnackBarBehavior.floating,
@@ -194,6 +182,15 @@ class _EditStudentState extends State<EditStudent> {
         ),
       ),
     );
-    editList(widget.index, studentmodel);
   }
 }
+
+// @override
+  // void initState() {
+  //   super.initState();
+
+  //   _nameOfStudent = TextEditingController(text: widget.name);
+  //   _ageOfStudent = TextEditingController(text: widget.age);
+  //   _addressOfStudent = TextEditingController(text: widget.address);
+  //   _phnOfStudent = TextEditingController(text: widget.number);
+  // }

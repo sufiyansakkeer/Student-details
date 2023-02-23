@@ -2,23 +2,26 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:sample_2/db/functions/db_function.dart';
 import 'package:sample_2/db/models/data_modal.dart';
+import 'package:sample_2/provider/provider_student.dart';
 
-class AddStudentClass extends StatefulWidget {
-  const AddStudentClass({Key? key}) : super(key: key);
+class AddStudentClass extends StatelessWidget {
+  AddStudentClass({Key? key}) : super(key: key);
 
-  @override
-  State<AddStudentClass> createState() => _AddStudentClassState();
-}
-
-class _AddStudentClassState extends State<AddStudentClass> {
   final _nameOfStudent = TextEditingController();
+
   final _ageOfStudent = TextEditingController();
+
   final _addressOfStudent = TextEditingController();
+
   final _phnOfStudent = TextEditingController();
+
   bool imageAlert = false;
+
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,27 +67,27 @@ class _AddStudentClassState extends State<AddStudentClass> {
                 //     ),
                 //   ],
                 // ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Visibility(
-                    visible: imageAlert,
-                    child: Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text(
-                            'Photo is required',
-                            style: TextStyle(
-                              color: Color(0xFFC01D11),
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(vertical: 10),
+                //   child: Visibility(
+                //     visible: imageAlert,
+                //     child: Padding(
+                //       padding: const EdgeInsets.all(3.0),
+                //       child: Row(
+                //         mainAxisAlignment: MainAxisAlignment.center,
+                //         children: const [
+                //           Text(
+                //             'Photo is required',
+                //             style: TextStyle(
+                //               color: Color(0xFFC01D11),
+                //               fontSize: 12,
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 TextFormField(
                   controller: _nameOfStudent,
                   decoration: const InputDecoration(
@@ -163,7 +166,7 @@ class _AddStudentClassState extends State<AddStudentClass> {
                 ElevatedButton.icon(
                     onPressed: (() {
                       if (_formKey.currentState!.validate()) {
-                        onStudentAddButtonClick();
+                        onStudentAddButtonClick(context);
                         Navigator.of(context).pop();
                       } else {
                         // imageAlert = true;
@@ -179,7 +182,7 @@ class _AddStudentClassState extends State<AddStudentClass> {
     );
   }
 
-  Future<void> onStudentAddButtonClick() async {
+  Future<void> onStudentAddButtonClick(context) async {
     final name = _nameOfStudent.text.trim();
     final age = _ageOfStudent.text.trim();
     final address = _addressOfStudent.text.trim();
@@ -222,29 +225,7 @@ class _AddStudentClassState extends State<AddStudentClass> {
       phnNumber: number,
       address: address,
     );
-    addStudent(student);
+    // addStudent(student);
+    Provider.of<ProviderStudent>(context, listen: false).addStudent(student);
   }
-
-  // File? _photo;
-  // Future<void> getPhoto() async {
-  //   final photo = await ImagePicker().pickImage(source: ImageSource.gallery);
-  //   if (photo == null) {
-  //     return;
-  //     // final photodefault = Image.asset(
-  //     //     'assets/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png');
-
-  //     // setState(
-  //     //   () {
-  //     //     _photo = photodefault;
-  //     //   },
-  //     // );
-  //   } else {
-  //     final photoTemp = File(photo.path);
-  //     setState(
-  //       () {
-  //         _photo = photoTemp;
-  //       },
-  //     );
-  //   }
-  // }
 }
