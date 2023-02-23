@@ -8,13 +8,13 @@ import 'package:sample_2/widgets/display_student_screen.dart';
 import 'package:sample_2/widgets/students_list.dart';
 
 class SearchWidget extends SearchDelegate {
-  @override
-  ThemeData appBarTheme(BuildContext context) {
-    assert(context != null);
-    final ThemeData theme = Theme.of(context);
-    assert(theme != null);
-    return theme;
-  }
+  // @override
+  // ThemeData appBarTheme(BuildContext context) {
+  //   assert(context != null);
+  //   final ThemeData theme = Theme.of(context);
+  //   assert(theme != null);
+  //   return theme;
+  // }
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -62,9 +62,9 @@ class SearchWidget extends SearchDelegate {
                       );
                     },
                     title: Text(data.name),
-                    leading: CircleAvatar(
-                      backgroundImage: FileImage(File(data.photo)),
-                    ),
+                    // leading: CircleAvatar(
+                    //   backgroundImage: FileImage(File(data.photo)),
+                    // ),
                   ),
                   const Divider()
                 ],
@@ -97,20 +97,21 @@ class SearchWidget extends SearchDelegate {
                         MaterialPageRoute(
                           builder: ((context) {
                             return DisplayStudent(
-                                name: data.name,
-                                age: data.age,
-                                address: data.address,
-                                number: data.phnNumber,
-                                index: index,
-                                photo: data.photo);
+                              name: data.name,
+                              age: data.age,
+                              address: data.address,
+                              number: data.phnNumber,
+                              index: index,
+                              // photo: data.photo
+                            );
                           }),
                         ),
                       );
                     },
                     title: Text(data.name),
-                    leading: CircleAvatar(
-                      backgroundImage: FileImage(File(data.photo)),
-                    ),
+                    // leading: CircleAvatar(
+                    //   backgroundImage: FileImage(File(data.photo)),
+                    // ),
                   ),
                   const Divider()
                 ],

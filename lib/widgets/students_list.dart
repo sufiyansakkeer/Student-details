@@ -7,14 +7,9 @@ import 'package:sample_2/widgets/edit_student.dart';
 
 import '../db/functions/db_function.dart';
 
-class ListStudents extends StatefulWidget {
+class ListStudents extends StatelessWidget {
   const ListStudents({super.key});
 
-  @override
-  State<ListStudents> createState() => _ListStudentsState();
-}
-
-class _ListStudentsState extends State<ListStudents> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -26,12 +21,12 @@ class _ListStudentsState extends State<ListStudents> {
               return Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: ListTile(
-                  leading: CircleAvatar(
-                    radius: 30,
-                    backgroundImage: FileImage(
-                      File(data.photo),
-                    ),
-                  ),
+                  // leading: CircleAvatar(
+                  //   radius: 30,
+                  //   backgroundImage: FileImage(
+                  //     File(data.photo),
+                  //   ),
+                  // ),
                   title: Text(data.name),
                   trailing: Wrap(
                     spacing: 12, // space between two icons
@@ -42,13 +37,14 @@ class _ListStudentsState extends State<ListStudents> {
                             MaterialPageRoute(
                               builder: ((context) {
                                 return EditStudent(
-                                    name: data.name,
-                                    age: data.age,
-                                    address: data.address,
-                                    number: data.phnNumber,
-                                    index: index,
-                                    image: data.photo,
-                                    photo: '');
+                                  name: data.name,
+                                  age: data.age,
+                                  address: data.address,
+                                  number: data.phnNumber,
+                                  index: index,
+                                  // image: data.photo,
+                                  // photo: ''
+                                );
                               }),
                             ),
                           );
@@ -117,7 +113,7 @@ class _ListStudentsState extends State<ListStudents> {
                             address: data.address,
                             number: data.phnNumber,
                             index: index,
-                            photo: data.photo,
+                            // photo: data.photo,
                           );
                         }),
                       ),

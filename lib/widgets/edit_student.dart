@@ -10,7 +10,7 @@ class EditStudent extends StatefulWidget {
   final String age;
   final String address;
   final String number;
-  final String image;
+  // final String image;
   final int index;
 
   const EditStudent({
@@ -20,8 +20,6 @@ class EditStudent extends StatefulWidget {
     required this.address,
     required this.number,
     required this.index,
-    required this.image,
-    required String photo,
   });
 
   @override
@@ -64,15 +62,15 @@ class _EditStudentState extends State<EditStudent> {
                       'Edit student details',
                       style: TextStyle(fontSize: 20),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    CircleAvatar(
-                      radius: 80,
-                      backgroundImage: FileImage(
-                        File(widget.image),
-                      ),
-                    ),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
+                    // CircleAvatar(
+                    //   radius: 80,
+                    //   backgroundImage: FileImage(
+                    //     File(widget.image),
+                    //   ),
+                    // ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -180,7 +178,7 @@ class _EditStudentState extends State<EditStudent> {
       age: _ageOfStudent.text,
       phnNumber: _phnOfStudent.text,
       address: _addressOfStudent.text,
-      photo: widget.image,
+      // photo: widget.image,
     );
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(

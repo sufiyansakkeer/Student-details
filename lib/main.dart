@@ -7,14 +7,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(StudentModelAdapter());
-  // Hive.registerAdapter(StudentModelAdapter());
 
-  // if (!Hive.isAdapterRegistered(StudentModelAdapter().typeId)) {
-  //   Hive.registerAdapter(StudentModelAdapter());
-  // }
-  // if (Hive.isAdapterRegistered(StudentModelAdapter().typeId)) {
-  //   Hive.registerAdapter(StudentModelAdapter());
-  // }
   runApp(const MyApp());
 }
 
@@ -30,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: HomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }

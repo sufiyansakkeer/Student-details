@@ -32,44 +32,65 @@ class _AddStudentClassState extends State<AddStudentClass> {
             key: _formKey,
             child: Column(
               children: [
-                _photo?.path == null
-                    ? const CircleAvatar(
-                        radius: 80,
-                        backgroundImage: AssetImage(
-                            'assets/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png'),
-                      )
-                    : CircleAvatar(
-                        backgroundImage: FileImage(
-                          File(
-                            _photo!.path,
+                // _photo?.path == null
+                //     ? const CircleAvatar(
+                //         radius: 80,
+                //         backgroundImage: AssetImage(
+                //             'assets/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png'),
+                //       )
+                //     : CircleAvatar(
+                //         backgroundImage: FileImage(
+                //           File(
+                //             _photo!.path,
+                //           ),
+                //         ),
+                //         radius: 60,
+                //       ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     ElevatedButton.icon(
+                //       style: ElevatedButton.styleFrom(
+                //           backgroundColor: Colors.black, elevation: 10),
+                //       onPressed: () {
+                //         // getPhoto();
+                //       },
+                //       icon: const Icon(
+                //         Icons.image_outlined,
+                //       ),
+                //       label: const Text(
+                //         'Add An Image',
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Visibility(
+                    visible: imageAlert,
+                    child: Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text(
+                            'Photo is required',
+                            style: TextStyle(
+                              color: Color(0xFFC01D11),
+                              fontSize: 12,
+                            ),
                           ),
-                        ),
-                        radius: 60,
-                      ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black, elevation: 10),
-                      onPressed: () {
-                        getPhoto();
-                      },
-                      icon: const Icon(
-                        Icons.image_outlined,
-                      ),
-                      label: const Text(
-                        'Add An Image',
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
                 TextFormField(
                   controller: _nameOfStudent,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Enter student Name',
-                    labelText: 'Name',
+                    // labelText: 'Name',
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -89,7 +110,7 @@ class _AddStudentClassState extends State<AddStudentClass> {
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Enter age',
-                    labelText: 'age',
+                    // labelText: 'age',
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -99,15 +120,15 @@ class _AddStudentClassState extends State<AddStudentClass> {
                     }
                   },
                 ),
-                // const SizedBox(
-                //   height: 20,
-                // ),
+                const SizedBox(
+                  height: 20,
+                ),
                 TextFormField(
                   controller: _addressOfStudent,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Enter address',
-                    labelText: 'address',
+                    // labelText: 'address',
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -127,7 +148,7 @@ class _AddStudentClassState extends State<AddStudentClass> {
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Enter the number',
-                    labelText: 'number',
+                    // labelText: 'number',
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -141,11 +162,11 @@ class _AddStudentClassState extends State<AddStudentClass> {
                 ),
                 ElevatedButton.icon(
                     onPressed: (() {
-                      if (_formKey.currentState!.validate() && _photo != null) {
+                      if (_formKey.currentState!.validate()) {
                         onStudentAddButtonClick();
                         Navigator.of(context).pop();
                       } else {
-                        imageAlert = true;
+                        // imageAlert = true;
                       }
                     }),
                     icon: const Icon(Icons.add),
@@ -164,11 +185,7 @@ class _AddStudentClassState extends State<AddStudentClass> {
     final address = _addressOfStudent.text.trim();
     final number = _phnOfStudent.text.trim();
 
-    if (_photo!.path.isEmpty ||
-        name.isEmpty ||
-        age.isEmpty ||
-        address.isEmpty ||
-        number.isEmpty) {
+    if (name.isEmpty || age.isEmpty || address.isEmpty || number.isEmpty) {
       // ScaffoldMessenger.of(context).showSnackBar(
       //   const SnackBar(
       //     behavior: SnackBarBehavior.floating,
@@ -178,7 +195,7 @@ class _AddStudentClassState extends State<AddStudentClass> {
       // );
       return;
     }
-    // else if (_photo!.path.isEmpty) {
+    //  else if (_photo!.path.isEmpty) {
     //   _photo = File(
     //       'assets/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png');
     //   // _photo.path = Image.asset(
@@ -204,31 +221,30 @@ class _AddStudentClassState extends State<AddStudentClass> {
       age: age,
       phnNumber: number,
       address: address,
-      photo: _photo!.path,
     );
     addStudent(student);
   }
 
-  File? _photo;
-  Future<void> getPhoto() async {
-    final photo = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (photo == null) {
-      return;
-      // final photodefault = Image.asset(
-      //     'assets/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png');
+  // File? _photo;
+  // Future<void> getPhoto() async {
+  //   final photo = await ImagePicker().pickImage(source: ImageSource.gallery);
+  //   if (photo == null) {
+  //     return;
+  //     // final photodefault = Image.asset(
+  //     //     'assets/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png');
 
-      // setState(
-      //   () {
-      //     _photo = photodefault;
-      //   },
-      // );
-    } else {
-      final photoTemp = File(photo.path);
-      setState(
-        () {
-          _photo = photoTemp;
-        },
-      );
-    }
-  }
+  //     // setState(
+  //     //   () {
+  //     //     _photo = photodefault;
+  //     //   },
+  //     // );
+  //   } else {
+  //     final photoTemp = File(photo.path);
+  //     setState(
+  //       () {
+  //         _photo = photoTemp;
+  //       },
+  //     );
+  //   }
+  // }
 }
