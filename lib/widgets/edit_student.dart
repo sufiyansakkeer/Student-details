@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 import 'package:sample_2/db/functions/db_function.dart';
@@ -10,24 +8,20 @@ class EditStudent extends StatelessWidget {
   final String age;
   final String address;
   final String number;
-
   final int index;
 
   EditStudent({
-    super.key,
+    Key? key,
     required this.name,
     required this.age,
     required this.address,
     required this.number,
     required this.index,
-  });
+  }) : super(key: key);
 
   TextEditingController _nameOfStudent = TextEditingController();
-
   TextEditingController _ageOfStudent = TextEditingController();
-
   TextEditingController _addressOfStudent = TextEditingController();
-
   TextEditingController _phnOfStudent = TextEditingController();
 
   final _formkey = GlobalKey<FormState>();
@@ -40,6 +34,7 @@ class EditStudent extends StatelessWidget {
     _phnOfStudent = TextEditingController(text: number);
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('Edit'),
       ),
       body: SafeArea(
@@ -51,7 +46,7 @@ class EditStudent extends StatelessWidget {
                 child: Column(
                   children: [
                     const Text(
-                      'Edit student details',
+                      'Edit Student',
                       style: TextStyle(fontSize: 20),
                     ),
                     const SizedBox(
@@ -61,8 +56,7 @@ class EditStudent extends StatelessWidget {
                       controller: _nameOfStudent,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: '',
-                        labelText: 'Name',
+                        hintText: 'Enter the name',
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -81,8 +75,7 @@ class EditStudent extends StatelessWidget {
                       keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: 'Enter your age',
-                        labelText: 'Age',
+                        hintText: 'Enter the age',
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -100,7 +93,6 @@ class EditStudent extends StatelessWidget {
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Enter your address',
-                        labelText: 'Address',
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -120,7 +112,6 @@ class EditStudent extends StatelessWidget {
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Enter your phn',
-                        labelText: 'Number',
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -133,7 +124,7 @@ class EditStudent extends StatelessWidget {
                       },
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton.icon(
                           onPressed: () {
@@ -143,7 +134,7 @@ class EditStudent extends StatelessWidget {
                             }
                           },
                           icon: const Icon(Icons.check),
-                          label: const Text('Save'),
+                          label: const Text('Update'),
                         ),
                       ],
                     ),
@@ -166,9 +157,8 @@ class EditStudent extends StatelessWidget {
       const SnackBar(
         behavior: SnackBarBehavior.floating,
         margin: EdgeInsets.all(30),
-        backgroundColor: Colors.blueGrey,
         content: Text(
-          'Saved',
+          'Updated',
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.white,

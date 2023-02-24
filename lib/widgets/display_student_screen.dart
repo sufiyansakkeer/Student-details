@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:sample_2/core/constants.dart';
 import 'package:sample_2/widgets/edit_student.dart';
 
 class DisplayStudent extends StatelessWidget {
@@ -25,13 +24,16 @@ class DisplayStudent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Student Details'),
+        centerTitle: true,
+        title: const Text('Details'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Center(
                   child: Text(
@@ -39,57 +41,55 @@ class DisplayStudent extends StatelessWidget {
                     style: TextStyle(fontSize: 25, color: Color(0xFF284350)),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                kHight20,
                 Text(
                   'Name: $name',
                   style: const TextStyle(
                     fontSize: 20,
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                kHight20,
                 Text(
                   'Age: $age',
                   style: const TextStyle(
                     fontSize: 20,
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                kHight20,
                 Text(
                   'Address: $address',
                   style: const TextStyle(
                     fontSize: 20,
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                kHight20,
                 Text(
                   'Phone Number: $number',
                   style: const TextStyle(
                     fontSize: 20,
                   ),
                 ),
-                ElevatedButton.icon(
-                    onPressed: (() {
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: ((context) {
-                        return EditStudent(
-                          name: name,
-                          age: age,
-                          address: address,
-                          number: number,
-                          index: index,
-                        );
-                      })));
-                    }),
-                    icon: const Icon(Icons.edit),
-                    label: const Text('Edit'))
+                kHight20,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton.icon(
+                        onPressed: (() {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: ((context) {
+                            return EditStudent(
+                              name: name,
+                              age: age,
+                              address: address,
+                              number: number,
+                              index: index,
+                            );
+                          })));
+                        }),
+                        icon: const Icon(Icons.edit),
+                        label: const Text('Edit')),
+                  ],
+                )
               ],
             ),
           ),

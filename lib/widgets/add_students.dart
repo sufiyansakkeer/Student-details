@@ -1,29 +1,24 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+
 import 'package:sample_2/db/functions/db_function.dart';
 import 'package:sample_2/db/models/data_modal.dart';
 
-class AddStudentClass extends StatefulWidget {
-  const AddStudentClass({Key? key}) : super(key: key);
-
-  @override
-  State<AddStudentClass> createState() => _AddStudentClassState();
-}
-
-class _AddStudentClassState extends State<AddStudentClass> {
+class AddStudentClass extends StatelessWidget {
+  AddStudentClass({Key? key}) : super(key: key);
   final _nameOfStudent = TextEditingController();
   final _ageOfStudent = TextEditingController();
   final _addressOfStudent = TextEditingController();
   final _phnOfStudent = TextEditingController();
-  bool imageAlert = false;
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Student details'),
+        centerTitle: true,
+        title: const Text('Add Student'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -106,7 +101,7 @@ class _AddStudentClassState extends State<AddStudentClass> {
                 ElevatedButton.icon(
                     onPressed: (() {
                       if (_formKey.currentState!.validate()) {
-                        onStudentAddButtonClick();
+                        onStudentAddButtonClick(context);
                         Navigator.of(context).pop();
                       }
                     }),
@@ -120,7 +115,7 @@ class _AddStudentClassState extends State<AddStudentClass> {
     );
   }
 
-  Future<void> onStudentAddButtonClick() async {
+  Future<void> onStudentAddButtonClick(context) async {
     final name = _nameOfStudent.text.trim();
     final age = _ageOfStudent.text.trim();
     final address = _addressOfStudent.text.trim();

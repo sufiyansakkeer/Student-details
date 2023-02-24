@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample_2/core/constants.dart';
 import 'package:sample_2/db/functions/db_function.dart';
 
 import 'package:sample_2/widgets/add_students.dart';
@@ -31,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
           ),
+          kWidth,
         ],
       ),
       body: const ListStudents(),
@@ -40,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return const AddStudentClass();
+                return AddStudentClass();
               },
             ),
           );
