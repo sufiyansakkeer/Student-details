@@ -8,9 +8,6 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(StudentModelAdapter());
 
-  // if (Hive.isAdapterRegistered(StudentModelAdapter().typeId)) {
-  //   Hive.registerAdapter(StudentModelAdapter());
-  // }
   runApp(const MyApp());
 }
 

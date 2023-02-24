@@ -8,7 +8,7 @@ class DisplayStudent extends StatelessWidget {
   final String age;
   final String address;
   final String number;
-  final String photo;
+
   final int index;
   const DisplayStudent({
     super.key,
@@ -17,7 +17,7 @@ class DisplayStudent extends StatelessWidget {
     required this.address,
     required this.number,
     required this.index,
-    required this.photo,
+
     // required String photo,
   });
 
@@ -37,17 +37,6 @@ class DisplayStudent extends StatelessWidget {
                   child: Text(
                     'Student Full Details',
                     style: TextStyle(fontSize: 25, color: Color(0xFF284350)),
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                CircleAvatar(
-                  radius: 80,
-                  backgroundImage: FileImage(
-                    File(
-                      photo,
-                    ),
                   ),
                 ),
                 const SizedBox(
@@ -91,13 +80,12 @@ class DisplayStudent extends StatelessWidget {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: ((context) {
                         return EditStudent(
-                            name: name,
-                            age: age,
-                            address: address,
-                            number: number,
-                            index: index,
-                            image: photo,
-                            photo: '');
+                          name: name,
+                          age: age,
+                          address: address,
+                          number: number,
+                          index: index,
+                        );
                       })));
                     }),
                     icon: const Icon(Icons.edit),

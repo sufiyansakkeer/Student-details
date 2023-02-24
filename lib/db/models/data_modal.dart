@@ -21,14 +21,10 @@ class StudentModel {
   @HiveField(4)
   final String phnNumber;
 
-  @HiveField(5)
-  final String photo;
-
   StudentModel(
       {required this.name,
       required this.age,
       required this.address,
       required this.phnNumber,
-      required this.photo,
       this.id});
 }
