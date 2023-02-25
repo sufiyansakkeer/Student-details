@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+
 import 'package:provider/provider.dart';
-import 'package:sample_2/db/functions/db_function.dart';
+
 import 'package:sample_2/db/models/data_modal.dart';
 import 'package:sample_2/provider/provider_student.dart';
 
@@ -17,8 +17,6 @@ class AddStudentClass extends StatelessWidget {
   final _addressOfStudent = TextEditingController();
 
   final _phnOfStudent = TextEditingController();
-
-  bool imageAlert = false;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -35,59 +33,6 @@ class AddStudentClass extends StatelessWidget {
             key: _formKey,
             child: Column(
               children: [
-                // _photo?.path == null
-                //     ? const CircleAvatar(
-                //         radius: 80,
-                //         backgroundImage: AssetImage(
-                //             'assets/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png'),
-                //       )
-                //     : CircleAvatar(
-                //         backgroundImage: FileImage(
-                //           File(
-                //             _photo!.path,
-                //           ),
-                //         ),
-                //         radius: 60,
-                //       ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     ElevatedButton.icon(
-                //       style: ElevatedButton.styleFrom(
-                //           backgroundColor: Colors.black, elevation: 10),
-                //       onPressed: () {
-                //         // getPhoto();
-                //       },
-                //       icon: const Icon(
-                //         Icons.image_outlined,
-                //       ),
-                //       label: const Text(
-                //         'Add An Image',
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(vertical: 10),
-                //   child: Visibility(
-                //     visible: imageAlert,
-                //     child: Padding(
-                //       padding: const EdgeInsets.all(3.0),
-                //       child: Row(
-                //         mainAxisAlignment: MainAxisAlignment.center,
-                //         children: const [
-                //           Text(
-                //             'Photo is required',
-                //             style: TextStyle(
-                //               color: Color(0xFFC01D11),
-                //               fontSize: 12,
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //   ),
-                // ),
                 TextFormField(
                   controller: _nameOfStudent,
                   decoration: const InputDecoration(
@@ -189,27 +134,8 @@ class AddStudentClass extends StatelessWidget {
     final number = _phnOfStudent.text.trim();
 
     if (name.isEmpty || age.isEmpty || address.isEmpty || number.isEmpty) {
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   const SnackBar(
-      //     behavior: SnackBarBehavior.floating,
-      //     margin: EdgeInsets.all(20),
-      //     content: Text("You need to add everything"),
-      //   ),
-      // );
       return;
-    }
-    //  else if (_photo!.path.isEmpty) {
-    //   _photo = File(
-    //       'assets/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png');
-    //   // _photo.path = Image.asset(
-    //   //     'assets/pngtree-cartoon-man-avatar-vector-ilustration-png-image_6111064.png');
-    //   // setState(
-    //   //   () {
-    //   //     _photo = photodefault;
-    //   //   },
-    //   // );
-    // }
-    else {
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           behavior: SnackBarBehavior.floating,

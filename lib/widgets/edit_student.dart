@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:sample_2/db/functions/db_function.dart';
 import 'package:sample_2/db/models/data_modal.dart';
 import 'package:sample_2/provider/provider_student.dart';
 
@@ -12,24 +9,20 @@ class EditStudent extends StatelessWidget {
   final String age;
   final String address;
   final String number;
-  // final String image;
   final int index;
 
   EditStudent({
-    super.key,
+    Key? key,
     required this.name,
     required this.age,
     required this.address,
     required this.number,
     required this.index,
-  });
+  }) : super(key: key);
 
   TextEditingController _nameOfStudent = TextEditingController();
-
   TextEditingController _ageOfStudent = TextEditingController();
-
   TextEditingController _addressOfStudent = TextEditingController();
-
   TextEditingController _phnOfStudent = TextEditingController();
 
   final _formkey = GlobalKey<FormState>();
@@ -184,13 +177,3 @@ class EditStudent extends StatelessWidget {
     );
   }
 }
-
-// @override
-  // void initState() {
-  //   super.initState();
-
-  //   _nameOfStudent = TextEditingController(text: widget.name);
-  //   _ageOfStudent = TextEditingController(text: widget.age);
-  //   _addressOfStudent = TextEditingController(text: widget.address);
-  //   _phnOfStudent = TextEditingController(text: widget.number);
-  // }

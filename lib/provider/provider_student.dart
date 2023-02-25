@@ -15,7 +15,6 @@ class ProviderStudent with ChangeNotifier {
     notifyListeners();
     studentDetails = studentDB.values.toList();
     notifyListeners();
-    print("add student called");
 
     //here we use notifylisteners because to notify the list without this the list widget won't work
   }
