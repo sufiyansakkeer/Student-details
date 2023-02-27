@@ -1,9 +1,10 @@
 import 'dart:io';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'package:sample_2/db/functions/db_function.dart';
 import 'package:sample_2/db/models/data_modal.dart';
+import 'package:sample_2/student_bloc/bloc/student_bloc.dart';
 
 class AddStudentClass extends StatelessWidget {
   AddStudentClass({Key? key}) : super(key: key);
@@ -101,6 +102,12 @@ class AddStudentClass extends StatelessWidget {
                 ElevatedButton.icon(
                     onPressed: (() {
                       if (_formKey.currentState!.validate()) {
+                        // context.read<StudentBloc>().add(AddStudent(
+                        //     studentModel: StudentModel(
+                        //         name: "name",
+                        //         age: "xx",
+                        //         address: "address",
+                        //         phnNumber: "phnNumber")));
                         onStudentAddButtonClick(context);
                         Navigator.of(context).pop();
                       }
@@ -139,6 +146,8 @@ class AddStudentClass extends StatelessWidget {
       phnNumber: number,
       address: address,
     );
-    addStudent(student);
+    BlocProvider.of<StudentBloc>(context)
+        .add(AddStudent(studentModel: student));
+    // addStudent(student);
   }
 }

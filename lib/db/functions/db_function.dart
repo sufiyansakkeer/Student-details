@@ -12,17 +12,18 @@ Future<void> addStudent(StudentModel value) async {
   final studentDB = await Hive.openBox<StudentModel>('student_db');
   final id = await studentDB.add(value);
   value.id = id;
-  studentListNotifier.value.add(value);
-  studentListNotifier.notifyListeners();
+  // studentListNotifier.value.add(value);
+  // studentListNotifier.notifyListeners();
   //here we use notifylisteners because to notify the list without this the list widget won't work
 }
 
-Future<void> getallstudents() async {
+Future<List<StudentModel>> getallstudents() async {
   final studentDB = await Hive.openBox<StudentModel>('student_db');
-  studentListNotifier.value.clear();
+  return studentDB.values.toList();
+  // studentListNotifier.value.clear();
 
-  studentListNotifier.notifyListeners();
-  studentListNotifier.value.addAll(studentDB.values);
+  // studentListNotifier.notifyListeners();
+  // studentListNotifier.value.addAll(studentDB.values);
 }
 
 Future<void> deleteStudent(int id) async {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sample_2/db/functions/db_function.dart';
 import 'package:sample_2/db/models/data_modal.dart';
+import 'package:sample_2/student_bloc/bloc/student_bloc.dart';
 
 class EditStudent extends StatelessWidget {
   final String name;
@@ -166,6 +168,8 @@ class EditStudent extends StatelessWidget {
         ),
       ),
     );
-    editList(index, studentmodel);
+    // editList(index, studentmodel);
+    BlocProvider.of<StudentBloc>(context)
+        .add(EditStudentEvent(studentModel: studentmodel, id: index));
   }
 }
